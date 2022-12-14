@@ -8,6 +8,7 @@ def render(bg, audio_clips):
 
     clips = [au.AudioFileClip(c) for c in audio_clips]
 
+    #TODO: normalize audio volume? trim quiet intro/outro?
     end = 0
     for i in range(len(clips)):
         clips[i] = clips[i].set_start(end)
