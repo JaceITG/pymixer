@@ -13,13 +13,14 @@ def my_hook(d):
         print('Done downloading, now converting ...')
 
 ydl_opts = {
-        'format': 'bestaudio/best',
+        'format': 'worst',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
+            'preferredcodec': None,
             'preferredquality': '192',
         }],
         'logger': MyLogger(),
         'progress_hooks': [my_hook],
         'default_search': 'ytsearch',
+        'match-filter': 'duration<600',
     }
