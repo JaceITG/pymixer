@@ -1,12 +1,13 @@
 from video import render
-import multiprocessing, sys
+import multiprocessing, os
 import utils
 import yt_dlp as youtube_dl
 
 
 def download(title, index):
     opts = utils.ydl_opts.copy()
-    opts['outtmpl'] = f"data/{index} {title}.%(ext)s"
+    opts['outtmpl'] = f"songs/{index} {title}.%(ext)s"
+
     with youtube_dl.YoutubeDL(opts) as ydl:
         ydl.download([title])
 
@@ -23,4 +24,15 @@ if __name__ == "__main__":
         download(song_titles[i], i)
 
 
-    #render('thumb.png', ['alone.mp3', 'beautiful.mp3'])
+    #Validate all songs were downloaded
+    songs_dir = os.listdir('songs')
+
+    last = -1
+    missing = False
+    for e in songs_dir:
+        if not (int(e[:e.index(' ')]) == last+1):
+            print(f"Missing song download for {song_titles[last+1]}, please retreive manually.")
+            missing = True
+        
+        last += 1
+    
