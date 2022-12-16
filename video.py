@@ -4,6 +4,7 @@ import moviepy.audio.io.AudioFileClip as au
 import moviepy.audio.AudioClip as aucomp
 
 def render(bg, audio_clips):
+    #TODO: render onscreen elements like audio visualizer or song info
     video = vd.ImageClip(bg)
 
     clips = [au.AudioFileClip(c) for c in audio_clips]
