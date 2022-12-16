@@ -1,5 +1,6 @@
 *.mp3
 *.mp4
+*.m4a
 *.png
 *.jpg
 __pycache__/
