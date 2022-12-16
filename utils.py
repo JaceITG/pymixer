@@ -12,8 +12,13 @@ def my_hook(d):
     if d['status'] == 'finished':
         print('Done downloading, now converting ...')
 
+def length(info, *, incomplete):
+    duration = info.get('duration')
+    if duration and duration > 600:
+        return 'Video Too Long, skipping'
+
 ydl_opts = {
-        'format': 'worst',
+        'format': 'm4a/bestaudio/best',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': None,
@@ -22,5 +27,5 @@ ydl_opts = {
         'logger': MyLogger(),
         'progress_hooks': [my_hook],
         'default_search': 'ytsearch',
-        'match-filter': 'duration<600',
+        'match_filter': length,
     }
