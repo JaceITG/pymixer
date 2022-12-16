@@ -27,12 +27,23 @@ if __name__ == "__main__":
     #Validate all songs were downloaded
     songs_dir = os.listdir('songs')
 
-    last = -1
     missing = False
-    for e in songs_dir:
-        if not (int(e[:e.index(' ')]) == last+1):
-            print(f"Missing song download for {song_titles[last+1]}, please retreive manually.")
+    downloaded_indices = [int(e[:e.index(' ')]) for e in songs_dir]
+
+    for i in range(len(song_titles)):
+        if i not in downloaded_indices:
+            print(f"Missing song download for {song_titles[i]}")
             missing = True
-        
-        last += 1
+    
+    if missing:
+        input("Place missing audio files in songs directory and press enter...")
+    
+    #get updated song dir and prepend folder path
+    songs_dir = os.listdir('songs')
+    song_fps = ['songs/'+s for s in songs_dir]
+
+    render('data/thumb.png', song_fps)
+
+    for e in songs_dir:
+        os.remove('songs/' + e)
     
