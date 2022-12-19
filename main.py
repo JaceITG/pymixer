@@ -1,5 +1,5 @@
 from video import render
-import multiprocessing, os
+import multiprocessing, os, sys
 import utils
 import yt_dlp as youtube_dl
 
@@ -12,16 +12,29 @@ def download(title, index):
         ydl.download([title])
 
 if __name__ == "__main__":
+
+    playlist = "playlist.txt"
+    skip_dl = False
+
+    args = sys.argv
+
+    if "-s" in args:
+        skip_dl = True
+        args.remove('-s')
+
+    if len(args) > 1:
+        playlist = args[1]
     
-    with open('data/playlist.txt', 'r') as f:
+    with open('data/'+playlist, 'r') as f:
         song_titles = [l.strip() for l in f.readlines()]
 
-    print("Downloading songs:")
-    for s in song_titles:
-        print(f"\t~{s}")
+    if not skip_dl:
+        print("Downloading songs:")
+        for s in song_titles:
+            print(f"\t~{s}")
 
-    for i in range(len(song_titles)):
-        download(song_titles[i], i)
+        for i in range(len(song_titles)):
+            download(song_titles[i], i)
 
 
     #Validate all songs were downloaded
@@ -44,6 +57,7 @@ if __name__ == "__main__":
 
     render('data/thumb.png', song_fps)
 
-    for e in songs_dir:
-        os.remove('songs/' + e)
+    if not utils.render_opts['keep_mp3s']:
+        for e in songs_dir:
+            os.remove('songs/' + e)
     

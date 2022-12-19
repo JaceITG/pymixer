@@ -18,14 +18,14 @@ def render(bg, audio_clips, opts=render_opts):
     for i in range(len(clips)):
 
         #extract song name
-        name = clips[i]
+        name = clips[i].filename
         name = name[name.index((' '))+1:name.rindex('.')]
 
         #build description
         time = end
         hours = time//3600
         time -= hours*3600
-        minutes, seconds = time//60, time%60
+        minutes, seconds = int(time//60), int(time%60)
 
         desc.append(f"{hours:02}:{minutes:02}:{seconds:02} // {name}")
 

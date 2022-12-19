@@ -32,4 +32,5 @@ ydl_opts = {
 
 render_opts = {
     'desc_file': True,
+    'keep_mp3s': False,
 }
