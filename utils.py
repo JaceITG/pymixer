@@ -29,3 +29,7 @@ ydl_opts = {
         'default_search': 'ytsearch',
         'match_filter': length,
     }
+
+render_opts = {
+    'desc_file': True,
+}
