@@ -17,6 +17,8 @@ Create a playlist .txt with the desired songs in the `data` folder, in the form
 
 separated by newlines.
 
+Next, save an image to be used as the background of the video in `data/thumb.png`
+
 ## Options
 
 Runtime options such as output framerate and description output can be adjusted in the `render_opts` dictionary within `utils.py`
